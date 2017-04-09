@@ -1,0 +1,9 @@
+var emailConfig = {};
+emailConfig.user = "pkcouncils";
+    emailConfig.password = "Lds@12345";
+    emailConfig.host = "smtp.gmail.com";
+    emailConfig.ssl = true;
+    emailConfig.sslport = 465;
+    emailConfig.servertimeout = 60000;
+    emailConfig.from = "admin@councils.io";
+module.exports = emailConfig;
