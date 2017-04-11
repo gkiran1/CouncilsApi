@@ -7,5 +7,6 @@ var router = express.Router();
 //router.post('/adduser', actions.addNew);
 //router.get('/getinfo', actions.getinfo);
 router.post('/sendmail', actions.sendmail);
-router.post('/pushmessage', actions.pushmessage);
+router.post('/donate', actions.donate);
+// router.post('/pushmessage', actions.pushmessage);
 module.exports = router;
