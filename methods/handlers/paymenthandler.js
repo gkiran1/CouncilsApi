@@ -13,6 +13,7 @@ var paymentHandler = function (req, res) {
         currency: "usd",
         description: "donation",
         source: token,
+        receipt_email: req.body.email
     }, function (err, charge) {
         if (err) {
             console.log('error occured while processing your request', err);
