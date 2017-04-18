@@ -6,14 +6,18 @@ var https = require('https');
 var querystring = require('querystring');
 var emailHandler = require('./handlers/emailhandler');
 var paymentHandler = require('./handlers/paymenthandler');
+var monthlyPaymentHandler = require('./handlers/monthlyPaymentHandler');
 
 var functions = {
-    
-    donate : function(req, res) {
+
+    donate: function (req, res) {
         paymentHandler(req, res);
     },
+    donateMonthly: function (req, res) {
+        monthlyPaymentHandler(req, res);
+    },
     sendmail: function (req, res) {
-        emailHandler(req, res, emailConfig);       
+        emailHandler(req, res, emailConfig);
 
     },
     // authenticate: function(req, res) {

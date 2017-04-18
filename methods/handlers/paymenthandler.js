@@ -32,6 +32,7 @@ var storeToDB = function (req, charge) {
     var admin = require("firebase-admin");
     var db = admin.database();
     db.ref("donations").push({
+        userid:req.body.userid,
         amount: charge.amount / 100,
         fullname: req.body.fullname,
         email: req.body.email,
