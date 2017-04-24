@@ -1,8 +1,10 @@
 var emailConfig = {};
-emailConfig.user = "pkcouncils";
-    emailConfig.password = "Lds@12345";
+emailConfig.user = "admin@councils.io";
+    emailConfig.password = "fiat7272";
     emailConfig.host = "smtp.gmail.com";
     emailConfig.ssl = true;
+    emailConfig.tls = false;
+    emailConfig.tlsport = 587;
     emailConfig.sslport = 465;
     emailConfig.servertimeout = 60000;
     emailConfig.from = "admin@councils.io";

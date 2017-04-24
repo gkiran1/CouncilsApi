@@ -6,6 +6,7 @@ var router = express.Router();
 //router.post('/authenticate', actions.authenticate);
 //router.post('/adduser', actions.addNew);
 //router.get('/getinfo', actions.getinfo);
+router.get('/',actions.get);
 router.post('/sendmail', actions.sendmail);
 router.post('/donate', actions.donate);
 router.post('/donate-monthly', actions.donateMonthly);

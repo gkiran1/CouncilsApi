@@ -1,5 +1,3 @@
-var email = require('emailjs/email');
-var emailConfig = require('../config/emailconfig');
 var ionicPushServer = require('ionic-push-server');
 var jwt = require('jwt-simple');
 var https = require('https');
@@ -9,6 +7,9 @@ var paymentHandler = require('./handlers/paymenthandler');
 var monthlyPaymentHandler = require('./handlers/monthlyPaymentHandler');
 
 var functions = {
+    get: function(req, res) {
+         res.json({ success: true, msg: 'Councils API in action...' });
+    },
 
     donate: function (req, res) {
         paymentHandler(req, res);
@@ -17,7 +18,7 @@ var functions = {
         monthlyPaymentHandler(req, res);
     },
     sendmail: function (req, res) {
-        emailHandler(req, res, emailConfig);
+        emailHandler.sendmail(req, res);
 
     },
     // authenticate: function(req, res) {
