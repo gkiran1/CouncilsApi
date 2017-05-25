@@ -5,6 +5,7 @@ morgan = require('morgan');
 //passport = require('passport');
 routes = require('./routes/routes');
 bodyParser = require('body-parser');
+var notificationsRef = require('./methods/handlers/notifications');
 
 
 //mongoose.connect(config.database);
@@ -14,13 +15,25 @@ bodyParser = require('body-parser');
 var app = express();
 app.use(morgan('dev'));
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(bodyParser.json());
 app.use(routes);
 //app.use(passport.initialize());
 //require('./config/passport')(passport);
 
 app.listen(8080, function () {
+    notificationsRef.agendasTrigger();
+    notificationsRef.agendasUpdateTrigger();
+    notificationsRef.assignmentsTrigger();
+    notificationsRef.assignmentsUpdateTrigger();
+    notificationsRef.discussionsTrigger();
+    notificationsRef.discussionsUpdateTrigger();
+    notificationsRef.privateDiscussionsTrigger();
+    notificationsRef.privateDiscussionsUpdateTrigger();
+    notificationsRef.userUpdateTrigger();
+    notificationsRef.filesTrigger();
     console.log('server is running');
 })
 //})
@@ -34,4 +47,3 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://councils-45092.firebaseio.com"
 });
-
