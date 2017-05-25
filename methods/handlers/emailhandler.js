@@ -29,6 +29,12 @@ var emailHandler =  {
             case 'admincreated':
                 this.adminCreated(req, res);
                 break;
+            case 'unitmissing':
+                this.unitMissing(req, res);
+                break;
+            case 'unitadminexist':
+                this.unitAdminExist(req, res);
+                break;
 
         }
     },
@@ -87,9 +93,12 @@ var emailHandler =  {
     },
 
     forgotPassword : function (req, res) {
+
+
+
         var subject = req.body.firstname + ", let's change your password!"
         var emailHtml = req.body.firstname + ", please click on below link to change your password."
-            +"<br><br><a href='www.councils.io'>Reset Password</a>"
+            +"<br><br><a href='https://councils-signup.firebaseapp.com/resetpwd'>Reset Password</a>"
             +"<br><br>If you have questions please email us at hello@councils.io"
             +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
         var emailText = req.body.firstname + ", please click on below link to change your password."
@@ -202,7 +211,50 @@ var emailHandler =  {
 
         this.send(res, req.body.email, subject, emailText, attachment);
     },
+    unitMissing : function(req, res) {
+        var subject = "Missing Unit #"+ req.body.unitnum
+        var emailHtml = "Dear Admin,"
+            + "<br><br>A new unit #"+req.body.unitnum+" is requested to be added to Councils."
+           
+            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
+        var emailText = "Dear Admin,"
 
+            + "\n\nA new unit #"+req.body.unitnum+" is request to be added to Councils."
+           
+            +"\n\nCouncils Foundation 501(C)(3) Salt Lake City Utah";
+
+        var attachment = [
+                { data: emailHtml, alternative: true }
+                
+            ];
+
+        this.send(res, "admin@councils.io", subject, emailText, attachment);
+    },
+    unitAdminExist : function(req, res) {
+        var subject = "New member add request on Councils"
+        var emailHtml = "Dear Admin,"
+            + "<br><br>A new member has requested to be added to Councils<br><br>"
+            + "Details:<br><br>"
+            + "Unit #" + req.body.unitnum + "<br>"
+            +"Name: " + req.body.name + "<br>"
+            + "Email: "+ req.body.email
+            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
+        var emailText = req.body.firstname + "Dear Admin,"
+            + "\n\nA new member has requested to be added to Councils\n\n"
+            + "Details:\n\n"
+            +"Unit #"+req.body.unitnum+"\n"
+             +"Name: "+req.body.name + "\n"
+            + "Email: "+req.body.email
+           
+            +"\n\nCouncils Foundation 501(C)(3) Salt Lake City Utah";
+
+        var attachment = [
+                { data: emailHtml, alternative: true }
+                
+            ];
+
+        this.send(res, "admin@councils.io", subject, emailText, attachment);
+    },
     adminTransfered : function(req, res) {
         var subject = "Unit #"+req.body.unitnum+" on Councils: Admin rights transferred"
         var emailHtml = req.body.firstname + ", you have transferred admin rights."
@@ -274,6 +326,8 @@ var emailHandler =  {
             });
 
     }
+
+    
 
 
 }
