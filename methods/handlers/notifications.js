@@ -1,5 +1,6 @@
 var firebase = require('firebase');
 var https = require('https');
+var request = require('request');
 
 var app = firebase.initializeApp({
     apiKey: "AIzaSyDXnywKsXMwYNmHtLjzQZxa52jhWrUAcD0",
@@ -11,11 +12,14 @@ var app = firebase.initializeApp({
 });
 
 var options = {
-    hostname: 'gcm-http.googleapis.com',
-    path: '/gcm/send',
+    protocol: 'https:',
+    hostname: 'fcm.googleapis.com',
+    path: '/fcm/send',
+    port: 443,
+    json: true,
     method: 'POST',
     headers: {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
         "Authorization": "key=" + "AAAASC34Gto:APA91bEXDfky2ZWKDfD3Ct-HZgQ06hqN0SO4XMEVYutJArXcy64sLfjAqY6tong21l7yzHEyaA8CERppvBxkGhrP2D5i1nbTDPw-Bxx3rIOeShkJ-nRoZMAbRej-A-X8LvIM10IYpgiO"
     }
 };
@@ -64,40 +68,47 @@ var notifications = {
                                                             createdby: createdBy,
                                                             isread: false
                                                         }).catch(err => {
+                                                            console.log('firebase error:' + err);
                                                             throw err
                                                         });
+                                                        // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                                                        // console.log(pushtkn);
+                                                        // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                                                        if (pushtkn !== undefined) {
+                                                            var push = {
+                                                                notification: {
 
-                                                        var notification = {
-                                                            "to": pushtkn,
-                                                            "priority": "normal",
-                                                            "notification": {
-                                                                "body": 'Sent from node New ' + description + ' agenda posted',
-                                                                "title": "LDS Councils",
-                                                                // "sound": "default",
-                                                                "icon": "new"
-                                                            }
-                                                        };
+                                                                    body: 'New ' + description + ' agenda posted',
+                                                                    title: "LDS Councils",
+                                                                    sound: "default",
+                                                                    icon: "icon"
+                                                                },
+                                                                content_available: true,
+                                                                to: pushtkn,
+                                                                priority: 'high'
+                                                            };
 
-                                                        console.log('pushtkn--------->', pushtkn);
-                                                        console.log('email----------->', email)
 
-                                                        var req = https.request(options, function (res) {
-                                                            console.log('STATUS: ' + res.statusCode);
-                                                            console.log('HEADERS: ' + JSON.stringify(res.headers));
-                                                            res.setEncoding('utf8');
-                                                            res.on('data', function (chunk) {
-                                                                console.log('BODY: ' + chunk);
+                                                            //console.log('Body:', JSON.stringify(push));
+                                                            options.body = JSON.stringify(push);
+                                                            var req = https.request(options, function (res) {
+                                                                console.log('STATUS: ' + res.statusCode);
+                                                                console.log('HEADERS: ' + JSON.stringify(res.headers));
+                                                                res.setEncoding('utf8');
+                                                                res.on('data', function (chunk) {
+                                                                    console.log('BODY: ' + chunk);
+                                                                });
                                                             });
-                                                        });
-                                                        req.on('error', function (e) {
-                                                            console.log('problem with request: ' + e.message);
-                                                        });
-                                                        req.write(JSON.stringify(notification));
-                                                        req.end();
+                                                            req.on('error', function (e) {
+                                                                console.log('problem with request: ' + e.message);
+                                                            });
+                                                            req.write(JSON.stringify(push));
+                                                            req.end();
 
+                                                        }
                                                     }
-                                                });
 
+                                                });
                                                 return true; // to stop the loop.
                                             }
                                         });
@@ -106,6 +117,9 @@ var notifications = {
                             }
                         });
                     });
+                }
+                else {
+                    console.log('Snapshot null');
                 }
             });
         });
@@ -180,30 +194,38 @@ var notifications = {
                                                                 throw err
                                                             });
 
-                                                            var notification = {
-                                                                "to": pushtkn,
-                                                                "priority": "normal",
-                                                                "notification": {
-                                                                    "body": text,
-                                                                    "title": "LDS Councils",
-                                                                    "sound": "default",
-                                                                    "icon": "icon"
-                                                                }
-                                                            };
+                                                            if (pushtkn !== undefined) {
+                                                                var push = {
+                                                                    notification: {
 
-                                                            var req = https.request(options, function (res) {
-                                                                console.log('STATUS: ' + res.statusCode);
-                                                                console.log('HEADERS: ' + JSON.stringify(res.headers));
-                                                                res.setEncoding('utf8');
-                                                                res.on('data', function (chunk) {
-                                                                    console.log('BODY: ' + chunk);
+                                                                        body: text,
+                                                                        title: "LDS Councils",
+                                                                        sound: "default",
+                                                                        icon: "icon"
+                                                                    },
+                                                                    content_available: true,
+                                                                    to: pushtkn,
+                                                                    priority: 'high'
+                                                                };
+
+
+                                                                //console.log('Body:', JSON.stringify(push));
+                                                                options.body = JSON.stringify(push);
+                                                                var req = https.request(options, function (res) {
+                                                                    console.log('STATUS: ' + res.statusCode);
+                                                                    console.log('HEADERS: ' + JSON.stringify(res.headers));
+                                                                    res.setEncoding('utf8');
+                                                                    res.on('data', function (chunk) {
+                                                                        console.log('BODY: ' + chunk);
+                                                                    });
                                                                 });
-                                                            });
-                                                            req.on('error', function (e) {
-                                                                console.log('problem with request: ' + e.message);
-                                                            });
-                                                            req.write(JSON.stringify(notification));
-                                                            req.end();
+                                                                req.on('error', function (e) {
+                                                                    console.log('problem with request: ' + e.message);
+                                                                });
+                                                                req.write(JSON.stringify(push));
+                                                                req.end();
+
+                                                            }
 
                                                         }
                                                     });
@@ -264,30 +286,38 @@ var notifications = {
                                                             throw err
                                                         });
 
-                                                        var notification = {
-                                                            "to": pushtkn,
-                                                            "priority": "normal",
-                                                            "notification": {
-                                                                "body": description + ' accepted by ' + assignedUser,
-                                                                "title": "LDS Councils",
-                                                                "sound": "default",
-                                                                "icon": "icon"
-                                                            }
-                                                        };
+                                                        if (pushtkn !== undefined) {
+                                                            var push = {
+                                                                notification: {
 
-                                                        var req = https.request(options, function (res) {
-                                                            console.log('STATUS: ' + res.statusCode);
-                                                            console.log('HEADERS: ' + JSON.stringify(res.headers));
-                                                            res.setEncoding('utf8');
-                                                            res.on('data', function (chunk) {
-                                                                console.log('BODY: ' + chunk);
+                                                                    body: description + ' accepted by ' + assignedUser,
+                                                                    title: "LDS Councils",
+                                                                    sound: "default",
+                                                                    icon: "icon"
+                                                                },
+                                                                content_available: true,
+                                                                to: pushtkn,
+                                                                priority: 'high'
+                                                            };
+
+
+                                                            //console.log('Body:', JSON.stringify(push));
+                                                            options.body = JSON.stringify(push);
+                                                            var req = https.request(options, function (res) {
+                                                                console.log('STATUS: ' + res.statusCode);
+                                                                console.log('HEADERS: ' + JSON.stringify(res.headers));
+                                                                res.setEncoding('utf8');
+                                                                res.on('data', function (chunk) {
+                                                                    console.log('BODY: ' + chunk);
+                                                                });
                                                             });
-                                                        });
-                                                        req.on('error', function (e) {
-                                                            console.log('problem with request: ' + e.message);
-                                                        });
-                                                        req.write(JSON.stringify(notification));
-                                                        req.end();
+                                                            req.on('error', function (e) {
+                                                                console.log('problem with request: ' + e.message);
+                                                            });
+                                                            req.write(JSON.stringify(push));
+                                                            req.end();
+
+                                                        }
 
                                                     }
                                                 });
@@ -376,30 +406,38 @@ var notifications = {
                                                                 throw err
                                                             });
 
-                                                            var notification = {
-                                                                "to": pushtkn,
-                                                                "priority": "normal",
-                                                                "notification": {
-                                                                    "body": text,
-                                                                    "title": "LDS Councils",
-                                                                    "sound": "default",
-                                                                    "icon": "icon"
-                                                                }
-                                                            };
+                                                            if (pushtkn !== undefined) {
+                                                                var push = {
+                                                                    notification: {
 
-                                                            var req = https.request(options, function (res) {
-                                                                console.log('STATUS: ' + res.statusCode);
-                                                                console.log('HEADERS: ' + JSON.stringify(res.headers));
-                                                                res.setEncoding('utf8');
-                                                                res.on('data', function (chunk) {
-                                                                    console.log('BODY: ' + chunk);
+                                                                        body: text,
+                                                                        title: "LDS Councils",
+                                                                        sound: "default",
+                                                                        icon: "icon"
+                                                                    },
+                                                                    content_available: true,
+                                                                    to: pushtkn,
+                                                                    priority: 'high'
+                                                                };
+
+
+                                                                //console.log('Body:', JSON.stringify(push));
+                                                                options.body = JSON.stringify(push);
+                                                                var req = https.request(options, function (res) {
+                                                                    console.log('STATUS: ' + res.statusCode);
+                                                                    console.log('HEADERS: ' + JSON.stringify(res.headers));
+                                                                    res.setEncoding('utf8');
+                                                                    res.on('data', function (chunk) {
+                                                                        console.log('BODY: ' + chunk);
+                                                                    });
                                                                 });
-                                                            });
-                                                            req.on('error', function (e) {
-                                                                console.log('problem with request: ' + e.message);
-                                                            });
-                                                            req.write(JSON.stringify(notification));
-                                                            req.end();
+                                                                req.on('error', function (e) {
+                                                                    console.log('problem with request: ' + e.message);
+                                                                });
+                                                                req.write(JSON.stringify(push));
+                                                                req.end();
+
+                                                            }
 
                                                         }
                                                     });
@@ -460,31 +498,38 @@ var notifications = {
                                                             throw err
                                                         });
 
-                                                        var notification = {
-                                                            "to": pushtkn,
-                                                            "priority": "normal",
-                                                            "notification": {
-                                                                "body": description + ' created in ' + councilName,
-                                                                "title": "LDS Councils",
-                                                                "sound": "default",
-                                                                "icon": "icon"
-                                                            }
-                                                        };
+                                                        if (pushtkn !== undefined) {
+                                                            var push = {
+                                                                notification: {
 
-                                                        var req = https.request(options, function (res) {
-                                                            console.log('STATUS: ' + res.statusCode);
-                                                            console.log('HEADERS: ' + JSON.stringify(res.headers));
-                                                            res.setEncoding('utf8');
-                                                            res.on('data', function (chunk) {
-                                                                console.log('BODY: ' + chunk);
+                                                                    body: description + ' created in ' + councilName,
+                                                                    title: "LDS Councils",
+                                                                    sound: "default",
+                                                                    icon: "icon"
+                                                                },
+                                                                content_available: true,
+                                                                to: pushtkn,
+                                                                priority: 'high'
+                                                            };
+
+
+                                                            //console.log('Body:', JSON.stringify(push));
+                                                            options.body = JSON.stringify(push);
+                                                            var req = https.request(options, function (res) {
+                                                                console.log('STATUS: ' + res.statusCode);
+                                                                console.log('HEADERS: ' + JSON.stringify(res.headers));
+                                                                res.setEncoding('utf8');
+                                                                res.on('data', function (chunk) {
+                                                                    console.log('BODY: ' + chunk);
+                                                                });
                                                             });
-                                                        });
-                                                        req.on('error', function (e) {
-                                                            console.log('problem with request: ' + e.message);
-                                                        });
-                                                        req.write(JSON.stringify(notification));
-                                                        req.end();
+                                                            req.on('error', function (e) {
+                                                                console.log('problem with request: ' + e.message);
+                                                            });
+                                                            req.write(JSON.stringify(push));
+                                                            req.end();
 
+                                                        }
                                                     }
                                                 });
                                                 return true; // to stop the loop.
@@ -525,30 +570,38 @@ var notifications = {
 
                                                     var pushtkn = usrSnapshot.val()['pushtoken'];
 
-                                                    var notification = {
-                                                        "to": pushtkn,
-                                                        "priority": "normal",
-                                                        "notification": {
-                                                            "body": 'Council Discussion - ' + description + ' -  @' + userName + ':  ' + msg,
-                                                            "title": "LDS Councils",
-                                                            "sound": "default",
-                                                            "icon": "icon"
-                                                        }
-                                                    };
+                                                    if (pushtkn !== undefined) {
+                                                        var push = {
+                                                            notification: {
 
-                                                    var req = https.request(options, function (res) {
-                                                        console.log('STATUS: ' + res.statusCode);
-                                                        console.log('HEADERS: ' + JSON.stringify(res.headers));
-                                                        res.setEncoding('utf8');
-                                                        res.on('data', function (chunk) {
-                                                            console.log('BODY: ' + chunk);
+                                                                body: 'Council Discussion - ' + description + ' - @' + userName + ': ' + msg,
+                                                                title: "LDS Councils",
+                                                                sound: "default",
+                                                                icon: "icon"
+                                                            },
+                                                            content_available: true,
+                                                            to: pushtkn,
+                                                            priority: 'high'
+                                                        };
+
+
+                                                        //console.log('Body:', JSON.stringify(push));
+                                                        options.body = JSON.stringify(push);
+                                                        var req = https.request(options, function (res) {
+                                                            console.log('STATUS: ' + res.statusCode);
+                                                            console.log('HEADERS: ' + JSON.stringify(res.headers));
+                                                            res.setEncoding('utf8');
+                                                            res.on('data', function (chunk) {
+                                                                console.log('BODY: ' + chunk);
+                                                            });
                                                         });
-                                                    });
-                                                    req.on('error', function (e) {
-                                                        console.log('problem with request: ' + e.message);
-                                                    });
-                                                    req.write(JSON.stringify(notification));
-                                                    req.end();
+                                                        req.on('error', function (e) {
+                                                            console.log('problem with request: ' + e.message);
+                                                        });
+                                                        req.write(JSON.stringify(push));
+                                                        req.end();
+
+                                                    }
 
 
                                                 }
@@ -582,11 +635,11 @@ var notifications = {
 
                             var pushtkn = usrSnapshot.val()['pushtoken'];
                             var email = usrSnapshot.val()['email'];
-                            
-                            console.log('////////////////////////////////////////////////');
-                            console.log('pushtkn--------->', pushtkn);
-                            console.log('email----------->', email)
-                            console.log('////////////////////////////////////////////////');
+
+                            // console.log('////////////////////////////////////////////////');
+                            // console.log('pushtkn--------->', pushtkn);
+                            // console.log('email----------->', email)
+                            // console.log('////////////////////////////////////////////////');
 
                             var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(userId);
                             notSettingsRef.once('value', function (notSnap) {
@@ -608,30 +661,38 @@ var notifications = {
                                                 throw err
                                             });
 
-                                            var notification = {
-                                                "to": pushtkn,
-                                                "priority": "normal",
-                                                "notification": {
-                                                    "body": description + ' private discussion invite',
-                                                    "title": "LDS Councils",
-                                                    "sound": "default",
-                                                    "icon": "icon"
-                                                }
-                                            };
+                                            if (pushtkn !== undefined) {
+                                                var push = {
+                                                    notification: {
 
-                                            var req = https.request(options, function (res) {
-                                                console.log('STATUS: ' + res.statusCode);
-                                                console.log('HEADERS: ' + JSON.stringify(res.headers));
-                                                res.setEncoding('utf8');
-                                                res.on('data', function (chunk) {
-                                                    console.log('BODY: ' + chunk);
+                                                        body: description + ' private discussion invite',
+                                                        title: "LDS Councils",
+                                                        sound: "default",
+                                                        icon: "icon"
+                                                    },
+                                                    content_available: true,
+                                                    to: pushtkn,
+                                                    priority: 'high'
+                                                };
+
+
+                                                //console.log('Body:', JSON.stringify(push));
+                                                options.body = JSON.stringify(push);
+                                                var req = https.request(options, function (res) {
+                                                    console.log('STATUS: ' + res.statusCode);
+                                                    console.log('HEADERS: ' + JSON.stringify(res.headers));
+                                                    res.setEncoding('utf8');
+                                                    res.on('data', function (chunk) {
+                                                        console.log('BODY: ' + chunk);
+                                                    });
                                                 });
-                                            });
-                                            req.on('error', function (e) {
-                                                console.log('problem with request: ' + e.message);
-                                            });
-                                            req.write(JSON.stringify(notification));
-                                            req.end();
+                                                req.on('error', function (e) {
+                                                    console.log('problem with request: ' + e.message);
+                                                });
+                                                req.write(JSON.stringify(push));
+                                                req.end();
+
+                                            }
 
                                             return true; // to stop the loop.
                                         }
@@ -677,30 +738,38 @@ var notifications = {
                                 notSnap.forEach(notSetting => {
                                     if (notSetting.val()['allactivity'] === true || notSetting.val()['pvtdiscussions'] === true) {
 
-                                        var notification = {
-                                            "to": pushtkn,
-                                            "priority": "normal",
-                                            "notification": {
-                                                "body": 'Private Discussion - ' + ' @' + name + ': ' + description,
-                                                "title": "LDS Councils",
-                                                "sound": "default",
-                                                "icon": "icon"
-                                            }
-                                        };
+                                        if (pushtkn !== undefined) {
+                                            var push = {
+                                                notification: {
 
-                                        var req = https.request(options, function (res) {
-                                            console.log('STATUS: ' + res.statusCode);
-                                            console.log('HEADERS: ' + JSON.stringify(res.headers));
-                                            res.setEncoding('utf8');
-                                            res.on('data', function (chunk) {
-                                                console.log('BODY: ' + chunk);
+                                                    body: 'Private discussion - @' + name + ': ' + description,
+                                                    title: "LDS Councils",
+                                                    sound: "default",
+                                                    icon: "icon"
+                                                },
+                                                content_available: true,
+                                                to: pushtkn,
+                                                priority: 'high'
+                                            };
+
+
+                                            //console.log('Body:', JSON.stringify(push));
+                                            options.body = JSON.stringify(push);
+                                            var req = https.request(options, function (res) {
+                                                console.log('STATUS: ' + res.statusCode);
+                                                console.log('HEADERS: ' + JSON.stringify(res.headers));
+                                                res.setEncoding('utf8');
+                                                res.on('data', function (chunk) {
+                                                    console.log('BODY: ' + chunk);
+                                                });
                                             });
-                                        });
-                                        req.on('error', function (e) {
-                                            console.log('problem with request: ' + e.message);
-                                        });
-                                        req.write(JSON.stringify(notification));
-                                        req.end();
+                                            req.on('error', function (e) {
+                                                console.log('problem with request: ' + e.message);
+                                            });
+                                            req.write(JSON.stringify(push));
+                                            req.end();
+
+                                        }
 
                                         return true; // to stop the loop.
                                     }
@@ -734,30 +803,38 @@ var notifications = {
                                     description = 'Your account is activated'
                                 }
 
-                                var notification = {
-                                    "to": pushtkn,
-                                    "priority": "normal",
-                                    "notification": {
-                                        "body": description,
-                                        "title": "LDS Councils",
-                                        "sound": "default",
-                                        "icon": "icon"
-                                    }
-                                };
+                                if (pushtkn !== undefined) {
+                                    var push = {
+                                        notification: {
 
-                                var req = https.request(options, function (res) {
-                                    console.log('STATUS: ' + res.statusCode);
-                                    console.log('HEADERS: ' + JSON.stringify(res.headers));
-                                    res.setEncoding('utf8');
-                                    res.on('data', function (chunk) {
-                                        console.log('BODY: ' + chunk);
+                                            body: description,
+                                            title: "LDS Councils",
+                                            sound: "default",
+                                            icon: "icon"
+                                        },
+                                        content_available: true,
+                                        to: pushtkn,
+                                        priority: 'high'
+                                    };
+
+
+                                    //console.log('Body:', JSON.stringify(push));
+                                    options.body = JSON.stringify(push);
+                                    var req = https.request(options, function (res) {
+                                        console.log('STATUS: ' + res.statusCode);
+                                        console.log('HEADERS: ' + JSON.stringify(res.headers));
+                                        res.setEncoding('utf8');
+                                        res.on('data', function (chunk) {
+                                            console.log('BODY: ' + chunk);
+                                        });
                                     });
-                                });
-                                req.on('error', function (e) {
-                                    console.log('problem with request: ' + e.message);
-                                });
-                                req.write(JSON.stringify(notification));
-                                req.end();
+                                    req.on('error', function (e) {
+                                        console.log('problem with request: ' + e.message);
+                                    });
+                                    req.write(JSON.stringify(push));
+                                    req.end();
+
+                                }
 
                             }
                             return true; // to stop the loop.
@@ -813,30 +890,38 @@ var notifications = {
                                                             throw err
                                                         });
 
-                                                        var notification = {
-                                                            "to": pushtkn,
-                                                            "priority": "normal",
-                                                            "notification": {
-                                                                "body": createdUser + ' sent you a file ' + name,
-                                                                "title": "LDS Councils",
-                                                                "sound": "default",
-                                                                "icon": "icon"
-                                                            }
-                                                        };
+                                                        if (pushtkn !== undefined) {
+                                                            var push = {
+                                                                notification: {
 
-                                                        var req = https.request(options, function (res) {
-                                                            console.log('STATUS: ' + res.statusCode);
-                                                            console.log('HEADERS: ' + JSON.stringify(res.headers));
-                                                            res.setEncoding('utf8');
-                                                            res.on('data', function (chunk) {
-                                                                console.log('BODY: ' + chunk);
+                                                                    body: createdUser + ' sent you a file ' + name,
+                                                                    title: "LDS Councils",
+                                                                    sound: "default",
+                                                                    icon: "icon"
+                                                                },
+                                                                content_available: true,
+                                                                to: pushtkn,
+                                                                priority: 'high'
+                                                            };
+
+
+                                                            //console.log('Body:', JSON.stringify(push));
+                                                            options.body = JSON.stringify(push);
+                                                            var req = https.request(options, function (res) {
+                                                                console.log('STATUS: ' + res.statusCode);
+                                                                console.log('HEADERS: ' + JSON.stringify(res.headers));
+                                                                res.setEncoding('utf8');
+                                                                res.on('data', function (chunk) {
+                                                                    console.log('BODY: ' + chunk);
+                                                                });
                                                             });
-                                                        });
-                                                        req.on('error', function (e) {
-                                                            console.log('problem with request: ' + e.message);
-                                                        });
-                                                        req.write(JSON.stringify(notification));
-                                                        req.end();
+                                                            req.on('error', function (e) {
+                                                                console.log('problem with request: ' + e.message);
+                                                            });
+                                                            req.write(JSON.stringify(push));
+                                                            req.end();
+
+                                                        }
 
                                                     }
                                                 });
