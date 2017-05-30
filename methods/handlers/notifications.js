@@ -71,10 +71,8 @@ var notifications = {
                                                             console.log('firebase error:' + err);
                                                             throw err
                                                         });
-                                                        // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                                                        // console.log(pushtkn);
-                                                        // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                                                        if (pushtkn !== undefined) {
+
+                                                        if (pushtkn !== undefined && pushtkn !== '') {
                                                             var push = {
                                                                 notification: {
 
@@ -117,8 +115,7 @@ var notifications = {
                             }
                         });
                     });
-                }
-                else {
+                } else {
                     console.log('Snapshot null');
                 }
             });
@@ -194,7 +191,7 @@ var notifications = {
                                                                 throw err
                                                             });
 
-                                                            if (pushtkn !== undefined) {
+                                                            if (pushtkn !== undefined && pushtkn !== '') {
                                                                 var push = {
                                                                     notification: {
 
@@ -286,7 +283,7 @@ var notifications = {
                                                             throw err
                                                         });
 
-                                                        if (pushtkn !== undefined) {
+                                                        if (pushtkn !== undefined && pushtkn !== '') {
                                                             var push = {
                                                                 notification: {
 
@@ -406,7 +403,7 @@ var notifications = {
                                                                 throw err
                                                             });
 
-                                                            if (pushtkn !== undefined) {
+                                                            if (pushtkn !== undefined && pushtkn !== '') {
                                                                 var push = {
                                                                     notification: {
 
@@ -498,7 +495,7 @@ var notifications = {
                                                             throw err
                                                         });
 
-                                                        if (pushtkn !== undefined) {
+                                                        if (pushtkn !== undefined && pushtkn !== '') {
                                                             var push = {
                                                                 notification: {
 
@@ -570,7 +567,7 @@ var notifications = {
 
                                                     var pushtkn = usrSnapshot.val()['pushtoken'];
 
-                                                    if (pushtkn !== undefined) {
+                                                    if (pushtkn !== undefined && pushtkn !== '') {
                                                         var push = {
                                                             notification: {
 
@@ -661,7 +658,7 @@ var notifications = {
                                                 throw err
                                             });
 
-                                            if (pushtkn !== undefined) {
+                                            if (pushtkn !== undefined && pushtkn !== '') {
                                                 var push = {
                                                     notification: {
 
@@ -738,7 +735,7 @@ var notifications = {
                                 notSnap.forEach(notSetting => {
                                     if (notSetting.val()['allactivity'] === true || notSetting.val()['pvtdiscussions'] === true) {
 
-                                        if (pushtkn !== undefined) {
+                                        if (pushtkn !== undefined && pushtkn !== '') {
                                             var push = {
                                                 notification: {
 
@@ -803,7 +800,7 @@ var notifications = {
                                     description = 'Your account is activated'
                                 }
 
-                                if (pushtkn !== undefined) {
+                                if (pushtkn !== undefined && pushtkn !== '') {
                                     var push = {
                                         notification: {
 
@@ -890,7 +887,7 @@ var notifications = {
                                                             throw err
                                                         });
 
-                                                        if (pushtkn !== undefined) {
+                                                        if (pushtkn !== undefined && pushtkn !== '') {
                                                             var push = {
                                                                 notification: {
 
