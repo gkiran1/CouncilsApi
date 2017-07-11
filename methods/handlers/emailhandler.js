@@ -104,7 +104,7 @@ var emailHandler =  {
 
 
 
-        var subject = req.body.firstname + ", let's change your password!"
+        var subject = "Forgot Password"
         var emailHtml = req.body.firstname + ", <br><br>please click on below link to change your password."
             +"<br><br><a href='https://councils-signup.firebaseapp.com/resetpwd'>Reset Password</a>"
             +"<br><br>If you have questions please email us at hello@councils.io"
@@ -252,15 +252,15 @@ var emailHandler =  {
         this.send(res, "admin@councils.io", subject, emailText, attachment);
     },
     adminTransfered : function(req, res) {
-        var subject = "Unit #"+req.body.unitnum+" on Councils: Admin rights transferred"
+        var subject = "Councils Admin Transferred"
         var emailHtml = req.body.firstname + ","
-            +"<br><br>You transferred admin rights of unit# "+req.body.unitnum+" to "+req.body.adminfirstname+" "+req.body.adminlastname+"."
-            +"<br><br>For future access to Councils in another calling, remember to log in using "+ req.body.email +" as your email"
+            +"<br><br>You transferred admin rights of unit# "+req.body.unitnum+" to <span style='color:#32b38a'>"+req.body.adminfirstname+" "+req.body.adminlastname+"</span>."
+            +"<br><br>For future access to Councils in another calling, remember to log in using <a href='mailto:"+ req.body.email +"'>"+ req.body.email +"</a> as your email"
             +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
             +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
         var emailText = req.body.firstname + ","
-            + "\n\nYou transferred admin rights of unit# "+req.body.unitnum+" to "+req.body.adminfirstname+" "+req.body.adminlastname+"."
-            +"\n\nFor future access to Councils in another calling, remember to log in using "+ req.body.email +" as your email"
+            + "\n\nYou transferred admin rights of unit# "+req.body.unitnum+" to <span style='color:#32b38a'>"+req.body.adminfirstname+" "+req.body.adminlastname+"</span>."
+            +"\n\nFor future access to Councils in another calling, remember to log in using <a href='mailto:"+ req.body.email +"'>"+ req.body.email +"</a> as your email"
             +"\n\nIf you have questions please email us at hello@councils.io"
             +"\n\nCouncils Foundation 501(C)(3) Salt Lake City Utah";
 
