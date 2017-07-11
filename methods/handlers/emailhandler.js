@@ -47,11 +47,11 @@ var emailHandler =  {
         //     + "<br><br><table border='0' cellpadding='10' cellspacing='0' style='border-collapse:collapse'><tr><td> <a href='" + iosLink + "'><img src='cid:appstore' width='200' height='60' /></a></td>"
         //     + "<td><a href='" + androidLink + "'><img src='cid:playstore' width='236' height='92' /></a></td></tr></table><br><br>**********";
 
-        var emailHtml = `<p>John Smith,</p>
-            <p>${req.body.adminfirstname} ${req.body.adminlastname} has invited you to the Councils platform.</p>
-            <p><b>Features on Councils</b><br />&nbsp; &nbsp; &ndash; Create agendas<br />&nbsp; &nbsp; &ndash;Start council or private discussions<br
+        var emailHtml = `<p>${req.body.name},</p>
+            <p><span style="color:#32b38a">${req.body.adminfirstname} ${req.body.adminlastname}<span> has invited you to the Councils platform.</p>
+            <p><b>Features on Councils</b><br />&nbsp; &nbsp; &ndash; Create agendas<br />&nbsp; &nbsp; &ndash; Start council or private discussions<br
                 />&nbsp; &nbsp; &ndash; Add assignments<br />&nbsp; &nbsp; &ndash; Post council files<br /></p>
-            <p><b>Download the app then register an account</b><br />Use ${req.body.email} as your email, then choose your own password.</p>
+            <p><b>Download the app then register an account</b><br />Use <a href='mailto:${req.body.email}' style="color:#32b38a;text-decoration:none">${req.body.email}</a> as your email, then choose your own password.</p>
             <p><b>Download the app for iPhone or Android </b><br /><a href='${iosLink}' style="color:#32b38a;text-decoration:none; font-size:150%;">App Store</a> / <a href="${androidLink}" style="color:#32b38a;text-decoration:none;font-size:150%;">Google Play</a></p>
             <p>If you have questions please email us as <a href='mailto:hello@councils.io' style="color:#32b38a;text-decoration:none">hello@councils.io</a></p>
             <p>Councils Foundation 501(C)(3) Salt Lake City, Utah</p>`
@@ -122,9 +122,9 @@ var emailHandler =  {
     }, 
     
     accountInactivated : function (req, res) {
-        var subject = req.body.firstname + ", your account in inactive"
+        var subject = "Goodbye From Councils"
         var emailHtml = req.body.firstname + ","
-            +"<br><br>Your account has been inactived by "+req.body.adminfirstname+" "+req.body.adminlastname+"."
+            +"<br><br>Your account has been inactived by <span style='color:#32b38a'>"+req.body.adminfirstname+" "+req.body.adminlastname+"</span>."
             +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
             +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
         var emailText = req.body.firstname + ","
@@ -141,10 +141,10 @@ var emailHandler =  {
     }, 
     
     accountReactivated : function (req, res) {
-        var subject = req.body.firstname + ", welcome back to Councils!"
+        var subject = "Welcome back to Councils"
         var emailHtml = req.body.firstname + ","
-            +"<br><br>Your Councils account has been re-activated by "+req.body.adminfirstname+" "+req.body.adminlastname+"."
-            +"<br><br>Re-download the app or sign back in using the email "+req.body.email+" and the password you created."
+            +"<br><br>Your Councils account has been re-activated by <span style='color:#32b38a'>"+req.body.adminfirstname+" "+req.body.adminlastname+"</span>."
+            +"<br><br>Re-download the app or sign back in using the email <a href='mailto:"+req.body.email+"'>"+req.body.email+"</a> and the password you created."
             +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
             +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
         var emailText = req.body.firstname + ","
@@ -162,7 +162,7 @@ var emailHandler =  {
     },
 
     adminCreated : function(req, res) {
-        var subject = "Unit #"+ req.body.unitnum + "on Councils: New Account Details"
+        var subject = "Welcome to Councils"
         // var emailHtml = req.body.firstname + ", welcome to Councils!<br>You've registered your  unit #" + req.body.unitnum + " on Councils. You are the account administrator."
         //     + "<br><br>Account Details<br><br>"
         //     + req.body.firstname + " " + req.body.lastname + "<br>"
@@ -176,13 +176,13 @@ var emailHandler =  {
         //     +"</ul>"
         //     +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
         //     +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
-        var emailHtml = `<p>John Smith,</p>
+        var emailHtml = `<p>${req.body.name},</p>
             <p>You&rsquo;ve registered your unit #${req.body.unitnum} on Councils. You are the account administrator.</p>
             <p><b>Account admin features</b><br />&nbsp; &nbsp; &ndash; Invite members<br />&nbsp; &nbsp; &ndash; Member access to which councils<br
                 />&nbsp; &nbsp; &ndash; View active councils<br />&nbsp; &nbsp; &ndash; Create new councils<br />&nbsp; &nbsp; &ndash;
                 Inactivate members<br />&nbsp; &nbsp; &ndash; Edit members access<br />&nbsp; &nbsp; &ndash; Re-activate members<br />&nbsp;
                 &nbsp; &ndash; Transfers admin rights<br />&nbsp; &nbsp; &ndash; View completed assignments</p>
-            <p><b>Download the app then register an account</b><br />Use ${req.body.email} as your email, then choose your own password.</p>
+            <p><b>Download the app then register an account</b><br />Use <a href='mailto:${req.body.email}' style="color:#32b38a;text-decoration:none">${req.body.email}</a> as your email, then choose your own password.</p>
             <p><b>Download the app for iPhone or Android </b><br /><a href='wwww.apple.com' style="color:#32b38a;text-decoration:none; font-size:150%;">App Store</a> / <a href="wwww.google.com" style="color:#32b38a;text-decoration:none;font-size:150%;">Google Play</a></p>
             <p>If you have questions please email us as <a href='mailto:hello@councils.io' style="color:#32b38a;text-decoration:none">hello@councils.io</a></p>
             <p>Councils Foundation 501(C)(3) Salt Lake City, Utah</p>`
