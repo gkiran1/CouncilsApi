@@ -24,16 +24,16 @@ app.use(routes);
 //require('./config/passport')(passport);
 
 app.listen(8080, function () {
-    notificationsRef.agendasTrigger();
-    notificationsRef.agendasUpdateTrigger();
-    notificationsRef.assignmentsTrigger();
-    notificationsRef.assignmentsUpdateTrigger();
-    notificationsRef.discussionsTrigger();
-    notificationsRef.discussionsUpdateTrigger();
-    notificationsRef.privateDiscussionsTrigger();
-    notificationsRef.privateDiscussionsUpdateTrigger();
-    notificationsRef.userUpdateTrigger();
-    notificationsRef.filesTrigger();
+    // notificationsRef.agendasTrigger();
+    // notificationsRef.agendasUpdateTrigger();
+    // notificationsRef.assignmentsTrigger();
+    // notificationsRef.assignmentsUpdateTrigger();
+    // notificationsRef.discussionsTrigger();
+    // notificationsRef.discussionsUpdateTrigger();
+    // notificationsRef.privateDiscussionsTrigger();
+    // notificationsRef.privateDiscussionsUpdateTrigger();
+    // notificationsRef.userUpdateTrigger();
+    // notificationsRef.filesTrigger();
     console.log('server is running');
 })
 //})
