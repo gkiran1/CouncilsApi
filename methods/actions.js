@@ -5,6 +5,7 @@ var querystring = require('querystring');
 var emailHandler = require('./handlers/emailhandler');
 var paymentHandler = require('./handlers/paymenthandler');
 var monthlyPaymentHandler = require('./handlers/monthlyPaymentHandler');
+//var identiconHandler = require('./handlers/identiconhandler');
 
 var functions = {
     get: function(req, res) {
@@ -21,6 +22,9 @@ var functions = {
         emailHandler.sendmail(req, res);
 
     },
+    // identicon: function(req, res) {
+    //     identiconHandler.generateIdenticon(req, res);
+    // }
     // authenticate: function(req, res) {
     //     User.findOne({
     //         name: req.body.name
