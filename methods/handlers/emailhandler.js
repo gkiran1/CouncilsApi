@@ -126,6 +126,7 @@ var emailHandler =  {
         var emailHtml = "<div style='font-family:Helvetica'>" + req.body.name + ","
             +"<br><br>Your account has been inactived by <span style='color:#32b38a'>"+req.body.adminname+"</span>."
             +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io' style='color:#32b38a;text-decoration:none'>hello@councils.io</a>"
+            +"<br><br>For future access to Councils in another calling, remember to log in using john.smith@company.com as your email."
             +"<br><br>Councils Foundation 501(C)(3) Salt Lake City, Utah </div>";
         var emailText = "<div style='font-family:Helvetica'>" + req.body.name + ","
             +"\n\nYour account has been inactived by "+req.body.adminname+"."
