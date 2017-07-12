@@ -47,14 +47,14 @@ var emailHandler =  {
         //     + "<br><br><table border='0' cellpadding='10' cellspacing='0' style='border-collapse:collapse'><tr><td> <a href='" + iosLink + "'><img src='cid:appstore' width='200' height='60' /></a></td>"
         //     + "<td><a href='" + androidLink + "'><img src='cid:playstore' width='236' height='92' /></a></td></tr></table><br><br>**********";
 
-        var emailHtml = `<p>${req.body.name},</p>
-            <p><span style="color:#32b38a">${req.body.adminname}<span> has invited you to the Councils platform.</p>
+        var emailHtml = `<div style="font-family:Helvetica"><p>${req.body.name},</p>
+            <p><span style="color:#32b38a">${req.body.adminname}</span> has invited you to the Councils platform.</p>
             <p><b>Features on Councils</b><br />&nbsp; &nbsp; &ndash; Create agendas<br />&nbsp; &nbsp; &ndash; Start council or private discussions<br
                 />&nbsp; &nbsp; &ndash; Add assignments<br />&nbsp; &nbsp; &ndash; Post council files<br /></p>
             <p><b>Download the app then register an account</b><br />Use <a href='mailto:${req.body.email}' style="color:#32b38a;text-decoration:none">${req.body.email}</a> as your email, then choose your own password.</p>
             <p><b>Download the app for iPhone or Android </b><br /><a href='${iosLink}' style="color:#32b38a;text-decoration:none; font-size:150%;">App Store</a> / <a href="${androidLink}" style="color:#32b38a;text-decoration:none;font-size:150%;">Google Play</a></p>
             <p>If you have questions please email us as <a href='mailto:hello@councils.io' style="color:#32b38a;text-decoration:none">hello@councils.io</a></p>
-            <p>Councils Foundation 501(C)(3) Salt Lake City, Utah</p>`
+            <p>Councils Foundation 501(C)(3) Salt Lake City, Utah</p></div>`
             
             var attachment = [
                 { data: emailHtml, alternative: true }
@@ -123,30 +123,30 @@ var emailHandler =  {
     
     accountInactivated : function (req, res) {
         var subject = "Goodbye From Councils"
-        var emailHtml = req.body.name + ","
+        var emailHtml = "<div style='font-family:Helvetica'>" + req.body.name + ","
             +"<br><br>Your account has been inactived by <span style='color:#32b38a'>"+req.body.adminname+"</span>."
-            +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
-            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
-        var emailText = req.body.name + ","
+            +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io' style='color:#32b38a;text-decoration:none'>hello@councils.io</a>"
+            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City, Utah </div>";
+        var emailText = "<div style='font-family:Helvetica'>" + req.body.name + ","
             +"\n\nYour account has been inactived by "+req.body.adminname+"."
             +"\n\nIf you have questions please email us at hello@councils.io"
-            +"\n\nCouncils Foundation 501(C)(3) Salt Lake City Utah";
+            +"\n\nCouncils Foundation 501(C)(3) Salt Lake City, Utah";
         
         var attachment = [
                 { data: emailHtml, alternative: true }
                 
             ];
 
-        this.send(res, req.body.email, subject, emailText, attachment);
+        this.send(res, req.body.email, subject, emailHtml, attachment);
     }, 
     
     accountReactivated : function (req, res) {
         var subject = "Welcome back to Councils"
-        var emailHtml = req.body.name + ","
+        var emailHtml = "<div style='font-family:Helvetica'>" + req.body.name + ","
             +"<br><br>Your Councils account has been re-activated by <span style='color:#32b38a'>"+req.body.adminname+"</span>."
-            +"<br><br>Re-download the app or sign back in using the email <a href='mailto:"+req.body.email+"'>"+req.body.email+"</a> and the password you created."
-            +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
-            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
+            +"<br><br>Re-download the app or sign back in using the email <a style='color:#32b38a;text-decoration:none' href='mailto:"+req.body.email+"'>"+req.body.email+"</a> and the password you created."
+            +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'  style='color:#32b38a;text-decoration:none'>hello@councils.io</a>"
+            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City, Utah </div>";
         var emailText = req.body.name + ","
             +"\n\nYour Councils account has been re-activated by "+req.body.adminname+"."
             + "\n\nRe-download the app or sign back in using the email "+req.body.email+" and the password you created."
@@ -158,7 +158,7 @@ var emailHandler =  {
                 
             ];
 
-        this.send(res, req.body.email, subject, emailText, attachment);
+        this.send(res, req.body.email, subject, emailHtml, attachment);
     },
 
     adminCreated : function(req, res) {
@@ -176,7 +176,7 @@ var emailHandler =  {
         //     +"</ul>"
         //     +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
         //     +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
-        var emailHtml = `<p>${req.body.firstname} ${req.body.lastname},</p>
+        var emailHtml = `<div style='font-family:Helvetica'><p>${req.body.firstname} ${req.body.lastname},</p>
             <p>You&rsquo;ve registered your unit #${req.body.unitnum} on Councils. You are the account administrator.</p>
             <p><b>Account admin features</b><br />&nbsp; &nbsp; &ndash; Invite members<br />&nbsp; &nbsp; &ndash; Member access to which councils<br
                 />&nbsp; &nbsp; &ndash; View active councils<br />&nbsp; &nbsp; &ndash; Create new councils<br />&nbsp; &nbsp; &ndash;
@@ -185,7 +185,7 @@ var emailHandler =  {
             <p><b>Download the app then register an account</b><br />Use <a href='mailto:${req.body.email}' style="color:#32b38a;text-decoration:none">${req.body.email}</a> as your email, then choose your own password.</p>
             <p><b>Download the app for iPhone or Android </b><br /><a href='wwww.apple.com' style="color:#32b38a;text-decoration:none; font-size:150%;">App Store</a> / <a href="wwww.google.com" style="color:#32b38a;text-decoration:none;font-size:150%;">Google Play</a></p>
             <p>If you have questions please email us as <a href='mailto:hello@councils.io' style="color:#32b38a;text-decoration:none">hello@councils.io</a></p>
-            <p>Councils Foundation 501(C)(3) Salt Lake City, Utah</p>`
+            <p>Councils Foundation 501(C)(3) Salt Lake City, Utah</p> </div>`
 
         var emailText = req.body.firstname + ", welcome to Councils!<br>You've registered your  unit #" + req.body.unitnum + " on Councils. You are the account administrator."
             + "\n\nAccount Details\n\n"
@@ -253,11 +253,11 @@ var emailHandler =  {
     },
     adminTransfered : function(req, res) {
         var subject = "Councils Admin Transferred"
-        var emailHtml = req.body.firstname+" "+ req.body.lastname  + ","
+        var emailHtml = "<div style='font-family:Helvetica'>" + req.body.firstname+" "+ req.body.lastname  + ","
             +"<br><br>You transferred admin rights of unit# "+req.body.unitnum+" to <span style='color:#32b38a'>"+req.body.adminfirstname+" "+req.body.adminlastname+"</span>."
-            +"<br><br>For future access to Councils in another calling, remember to log in using <a href='mailto:"+ req.body.email +"'>"+ req.body.email +"</a> as your email"
-            +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
-            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
+            +"<br><br>For future access to Councils in another calling, remember to log in using <a style='color:#32b38a;text-decoration:none' href='mailto:"+ req.body.email +"'>"+ req.body.email +"</a> as your email"
+            +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io' style='color:#32b38a;text-decoration:none'>hello@councils.io</a>"
+            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City, Utah </div>";
         var emailText = req.body.firstname+" "+ req.body.lastname  + ","
             + "\n\nYou transferred admin rights of unit# "+req.body.unitnum+" to <span style='color:#32b38a'>"+req.body.adminfirstname+" "+req.body.adminlastname+"</span>."
             +"\n\nFor future access to Councils in another calling, remember to log in using <a href='mailto:"+ req.body.email +"'>"+ req.body.email +"</a> as your email"
