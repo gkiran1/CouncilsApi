@@ -54,7 +54,7 @@ var emailHandler =  {
             <p><b>Download the app then register an account</b><br />Use <a href='mailto:${req.body.email}' style="color:#32b38a;text-decoration:none">${req.body.email}</a> as your email, then choose your own password.</p>
             <p><b>Download the app for iPhone or Android </b><br /><a href='${iosLink}' style="color:#32b38a;text-decoration:none; font-size:150%;">App Store</a> / <a href="${androidLink}" style="color:#32b38a;text-decoration:none;font-size:150%;">Google Play</a></p>
             <p>If you have questions please email us as <a href='mailto:hello@councils.io' style="color:#32b38a;text-decoration:none">hello@councils.io</a></p>
-            <p>Councils Foundation 501(C)(3) Salt Lake City, Utah</p></div>`
+            <p>Copyright (C) 2017 Councils Inc. All rights reserved.</p></div>`
             
             var attachment = [
                 { data: emailHtml, alternative: true }
@@ -77,7 +77,7 @@ var emailHandler =  {
             +"<li>Post councils files.</li>"
             +"</ul>"
             +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
-            +"<br><br>Councils Foundation 501 (c)(3) Salt Lake City Utah";
+            +"<br><br>Copyright (C) 2017 Councils Inc. All rights reserved.";
         var emailText = req.body.firstname + ", Welcome to Councils!<br>You are now a member of unit # " + req.body.unitnum + ". "
             + "\n\nAccount Details\n\n"
             + req.body.firstname + " " + req.body.lastname + "\n"
@@ -89,7 +89,7 @@ var emailHandler =  {
             +"- Add Assignments.\n"
             +"- Post councils files.\n"
             +"\n\nIf you have questions please email us at hello@councils.io"
-            +"\n\nCouncils Foundation 501 (c)(3) Salt Lake City Utah";
+            +"\n\nCopyright (C) 2017 Councils Inc. All rights reserved.";
 
             var attachment = [
                 { data: emailHtml, alternative: true }
@@ -108,11 +108,11 @@ var emailHandler =  {
         var emailHtml = req.body.name + ", <br><br>please click on below link to change your password."
             +"<br><br><a href='https://councils-signup.firebaseapp.com/resetpwd'>Reset Password</a>"
             +"<br><br>If you have questions please email us at hello@councils.io"
-            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
+            +"<br><br>Copyright (C) 2017 Councils Inc. All rights reserved.";
         var emailText = req.body.name + ", <br><br>please click on below link to change your password."
             + "\n\nwww.councils.io" 
             +"\n\nIf you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
-            +"\n\nCouncils Foundation 501(C)(3) Salt Lake City Utah";
+            +"\n\nCopyright (C) 2017 Councils Inc. All rights reserved.";
         var attachment = [
                 { data: emailHtml, alternative: true }
                 
@@ -127,11 +127,11 @@ var emailHandler =  {
             +"<br><br>Your account has been inactived by <span style='color:#32b38a'>"+req.body.adminname+"</span>."
             +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io' style='color:#32b38a;text-decoration:none'>hello@councils.io</a>"
             +"<br><br>For future access to Councils in another calling, remember to log in using john.smith@company.com as your email."
-            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City, Utah </div>";
+            +"<br><br>Copyright (C) 2017 Councils Inc. All rights reserved.</div>";
         var emailText = "<div style='font-family:Helvetica'>" + req.body.name + ","
             +"\n\nYour account has been inactived by "+req.body.adminname+"."
             +"\n\nIf you have questions please email us at hello@councils.io"
-            +"\n\nCouncils Foundation 501(C)(3) Salt Lake City, Utah";
+            +"\n\nCopyright (C) 2017 Councils Inc. All rights reserved.";
         
         var attachment = [
                 { data: emailHtml, alternative: true }
@@ -147,12 +147,12 @@ var emailHandler =  {
             +"<br><br>Your Councils account has been re-activated by <span style='color:#32b38a'>"+req.body.adminname+"</span>."
             +"<br><br>Re-download the app or sign back in using the email <a style='color:#32b38a;text-decoration:none' href='mailto:"+req.body.email+"'>"+req.body.email+"</a> and the password you created."
             +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'  style='color:#32b38a;text-decoration:none'>hello@councils.io</a>"
-            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City, Utah </div>";
+            +"<br><br>Copyright (C) 2017 Councils Inc. All rights reserved.</div>";
         var emailText = req.body.name + ","
             +"\n\nYour Councils account has been re-activated by "+req.body.adminname+"."
             + "\n\nRe-download the app or sign back in using the email "+req.body.email+" and the password you created."
             +"\n\nIf you have questions please email us at hello@councils.io"
-            +"\n\nCouncils Foundation 501 (C)(3) Salt Lake City Utah";
+            +"\n\nCopyright (C) 2017 Councils Inc. All rights reserved.";
         
         var attachment = [
                 { data: emailHtml, alternative: true }
@@ -186,7 +186,7 @@ var emailHandler =  {
             <p><b>Download the app then register an account</b><br />Use <a href='mailto:${req.body.email}' style="color:#32b38a;text-decoration:none">${req.body.email}</a> as your email, then choose your own password.</p>
             <p><b>Download the app for iPhone or Android </b><br /><a href='wwww.apple.com' style="color:#32b38a;text-decoration:none; font-size:150%;">App Store</a> / <a href="wwww.google.com" style="color:#32b38a;text-decoration:none;font-size:150%;">Google Play</a></p>
             <p>If you have questions please email us as <a href='mailto:hello@councils.io' style="color:#32b38a;text-decoration:none">hello@councils.io</a></p>
-            <p>Councils Foundation 501(C)(3) Salt Lake City, Utah</p> </div>`
+            <p>Copyright (C) 2017 Councils Inc. All rights reserved.</p> </div>`
 
         var emailText = req.body.firstname + ", welcome to Councils!<br>You've registered your  unit #" + req.body.unitnum + " on Councils. You are the account administrator."
             + "\n\nAccount Details\n\n"
@@ -199,7 +199,7 @@ var emailHandler =  {
             +"- Add Assignments.\n"
             +"- Post councils files.\n"
             +"\n\nIf you have questions please email us at hello@councils.io"
-            +"\n\nCouncils Foundation 501(C)(3) Salt Lake City Utah";
+            +"\n\nCopyright (C) 2017 Councils Inc. All rights reserved.";
 
         var attachment = [
                 { data: emailHtml, alternative: true }
@@ -213,12 +213,12 @@ var emailHandler =  {
         var emailHtml = "Dear Admin,"
             + "<br><br>A new unit #"+req.body.unitnum+" is requested to be added to Councils."
            
-            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
+            +"<br><br>Copyright (C) 2017 Councils Inc. All rights reserved.";
         var emailText = "Dear Admin,"
 
             + "\n\nA new unit #"+req.body.unitnum+" is request to be added to Councils."
            
-            +"\n\nCouncils Foundation 501(C)(3) Salt Lake City Utah";
+            +"\n\nCopyright (C) 2017 Councils Inc. All rights reserved.";
 
         var attachment = [
                 { data: emailHtml, alternative: true }
@@ -235,7 +235,7 @@ var emailHandler =  {
             + "Unit #" + req.body.unitnum + "<br>"
             +"Name: " + req.body.name + "<br>"
             + "Email: "+ req.body.email
-            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City Utah";
+            +"<br><br>Copyright (C) 2017 Councils Inc. All rights reserved.";
         var emailText = req.body.firstname + "Dear Admin,"
             + "\n\nA new member has requested to be added to Councils\n\n"
             + "Details:\n\n"
@@ -243,7 +243,7 @@ var emailHandler =  {
              +"Name: "+req.body.name + "\n"
             + "Email: "+req.body.email
            
-            +"\n\nCouncils Foundation 501(C)(3) Salt Lake City Utah";
+            +"\n\nCopyright (C) 2017 Councils Inc. All rights reserved.";
 
         var attachment = [
                 { data: emailHtml, alternative: true }
@@ -258,12 +258,12 @@ var emailHandler =  {
             +"<br><br>You transferred admin rights of unit# "+req.body.unitnum+" to <span style='color:#32b38a'>"+req.body.adminfirstname+" "+req.body.adminlastname+"</span>."
             +"<br><br>For future access to Councils in another calling, remember to log in using <a style='color:#32b38a;text-decoration:none' href='mailto:"+ req.body.email +"'>"+ req.body.email +"</a> as your email"
             +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io' style='color:#32b38a;text-decoration:none'>hello@councils.io</a>"
-            +"<br><br>Councils Foundation 501(C)(3) Salt Lake City, Utah </div>";
+            +"<br><br>Copyright (C) 2017 Councils Inc. All rights reserved.</div>";
         var emailText = req.body.firstname+" "+ req.body.lastname  + ","
             + "\n\nYou transferred admin rights of unit# "+req.body.unitnum+" to <span style='color:#32b38a'>"+req.body.adminfirstname+" "+req.body.adminlastname+"</span>."
             +"\n\nFor future access to Councils in another calling, remember to log in using <a href='mailto:"+ req.body.email +"'>"+ req.body.email +"</a> as your email"
             +"\n\nIf you have questions please email us at hello@councils.io"
-            +"\n\nCouncils Foundation 501(C)(3) Salt Lake City Utah";
+            +"\n\nCopyright (C) 2017 Councils Inc. All rights reserved.";
 
         var attachment = [
                 { data: emailHtml, alternative: true }
