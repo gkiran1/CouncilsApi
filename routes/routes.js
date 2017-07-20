@@ -10,6 +10,7 @@ router.get('/',actions.get);
 router.post('/sendmail', actions.sendmail);
 router.post('/donate', actions.donate);
 router.post('/donate-monthly', actions.donateMonthly);
+router.post('/nextpayment-date', actions.getNextPaymentDate);
 //router.post('/identicon', actions.identicon);
 // router.post('/pushmessage', actions.pushmessage);
 module.exports = router;

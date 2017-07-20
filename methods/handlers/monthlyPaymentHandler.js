@@ -36,7 +36,7 @@ var monthlyPaymentHandler = function (req, res) {
                         } else {
                             //store the suscription id in DB for future reference.
                             storeToDB(req, customer, subscription);
-                            res.json({ msg: "your request has been processed" });
+                            res.json({ msg: "your request has been processed", id: subscription.id });
                         }
                     });
                 }
@@ -50,9 +50,9 @@ var monthlyPaymentHandler = function (req, res) {
 var storeToDB = function (req, customer, subscription) {
     var admin = require("firebase-admin");
     var db = admin.database();
-    db.ref("monthlydonations").push({
-        userid:req.body.userid,
-        amount: subscription.plan.amount/100,
+    db.ref("subscriptions").push({
+        userid: req.body.userid,
+        amount: subscription.plan.amount / 100,
         fullname: req.body.fullname,
         email: req.body.email,
         donationtype: req.body.donationtype,

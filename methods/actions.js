@@ -5,11 +5,12 @@ var querystring = require('querystring');
 var emailHandler = require('./handlers/emailhandler');
 var paymentHandler = require('./handlers/paymenthandler');
 var monthlyPaymentHandler = require('./handlers/monthlyPaymentHandler');
+var nextPaymentHandler = require('./handlers/nextPaymentHandler');
 //var identiconHandler = require('./handlers/identiconhandler');
 
 var functions = {
-    get: function(req, res) {
-         res.json({ success: true, msg: 'Councils API in action...' });
+    get: function (req, res) {
+        res.json({ success: true, msg: 'Councils API in action...' });
     },
 
     donate: function (req, res) {
@@ -17,6 +18,9 @@ var functions = {
     },
     donateMonthly: function (req, res) {
         monthlyPaymentHandler(req, res);
+    },
+    getNextPaymentDate: function (req, res) {
+        nextPaymentHandler(req, res);
     },
     sendmail: function (req, res) {
         emailHandler.sendmail(req, res);

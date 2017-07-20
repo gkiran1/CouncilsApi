@@ -45,5 +45,5 @@ var serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://councils-45092.firebaseio.com"
+    databaseURL: "https://councilsdb.firebaseio.com"
 });
