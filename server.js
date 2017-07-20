@@ -1,17 +1,10 @@
 var express = require('express');
 cors = require('cors');
 morgan = require('morgan');
-//config = require('./config/database');
-//passport = require('passport');
 routes = require('./routes/routes');
 bodyParser = require('body-parser');
-var notificationsRef = require('./methods/handlers/notifications');
 
 
-//mongoose.connect(config.database);
-
-//mongoose.connection.on('open', function(){
-//console.log('Mongo is connected');
 var app = express();
 app.use(morgan('dev'));
 app.use(cors());
@@ -20,20 +13,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(routes);
-//app.use(passport.initialize());
-//require('./config/passport')(passport);
 
-app.listen(8080, function () {
-    // notificationsRef.agendasTrigger();
-    // notificationsRef.agendasUpdateTrigger();
-    // notificationsRef.assignmentsTrigger();
-    // notificationsRef.assignmentsUpdateTrigger();
-    // notificationsRef.discussionsTrigger();
-    // notificationsRef.discussionsUpdateTrigger();
-    // notificationsRef.privateDiscussionsTrigger();
-    // notificationsRef.privateDiscussionsUpdateTrigger();
-    // notificationsRef.userUpdateTrigger();
-    // notificationsRef.filesTrigger();
+
+app.listen(3333, function () {
     console.log('server is running');
 })
 //})
