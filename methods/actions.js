@@ -6,6 +6,7 @@ var emailHandler = require('./handlers/emailhandler');
 var paymentHandler = require('./handlers/paymenthandler');
 var monthlyPaymentHandler = require('./handlers/monthlyPaymentHandler');
 var nextPaymentHandler = require('./handlers/nextPaymentHandler');
+var cancelSubscriptionHandler = require('./handlers/cancelSubscriptionHandler');
 //var identiconHandler = require('./handlers/identiconhandler');
 
 var functions = {
@@ -21,6 +22,9 @@ var functions = {
     },
     getNextPaymentDate: function (req, res) {
         nextPaymentHandler(req, res);
+    },
+    cancelSubscription: function (req, res) {
+        cancelSubscriptionHandler(req, res);
     },
     sendmail: function (req, res) {
         emailHandler.sendmail(req, res);
