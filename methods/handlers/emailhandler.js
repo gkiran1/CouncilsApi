@@ -65,19 +65,18 @@ var emailHandler =  {
 
     accountCreated : function (req, res) {
         var subject = req.body.firstname + ", welcome to Councils!"
-        var emailHtml = req.body.firstname + ", welcome to Councils!<br>You are now a member of unit #" + req.body.unitnum + ". "
+        var emailHtml = "<div style='font-family:Helvetica'>"+req.body.firstname + ", welcome to Councils!<br>You are now a member of unit #" + req.body.unitnum + ". "
             + "<br><br>Account Details<br><br>"
-            + req.body.firstname + " " + req.body.lastname + "<br>"
-            + req.body.email
+            + req.body.firstname + " " + req.body.lastname + "<br><br>"
+            + "<a href='mailto:hello@councils.io'  style='color:#32b38a;text-decoration:none'>"+req.body.email+"</a>"
             + "<br><br>These are the features you have access to as a member."
-            +"<ul>"
-            +"<li>Create Agendas.</li>"
-            +"<li>Start council or private discussions.</li>"
-            +"<li>Add Assignments.</li>"
-            +"<li>Post councils files.</li>"
-            +"</ul>"
-            +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'>hello@councils.io</a>"
-            +"<br><br>Copyright (C) 2017 Councils Inc. All rights reserved.";
+            +"<br><br>"
+            +"&nbsp; &nbsp; &ndash; Create Agendas.<br>"
+            +"&nbsp; &nbsp; &ndash; Start council or private discussions.<br>"
+            +"&nbsp; &nbsp; &ndash; Add Assignments.<br>"
+            +"&nbsp; &nbsp; &ndash; Post councils files.<br>"
+            +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io'  style='color:#32b38a;text-decoration:none'>hello@councils.io</a>"
+            +"<br><br>Copyright (C) 2017 Councils Inc. All rights reserved.</div>";
         var emailText = req.body.firstname + ", Welcome to Councils!<br>You are now a member of unit # " + req.body.unitnum + ". "
             + "\n\nAccount Details\n\n"
             + req.body.firstname + " " + req.body.lastname + "\n"
@@ -96,7 +95,7 @@ var emailHandler =  {
                 
             ];
 
-        this.send(res, req.body.email, subject, emailText, attachment);
+        this.send(res, req.body.email, subject, emailHtml, attachment);
         
     },
 
