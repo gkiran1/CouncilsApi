@@ -68,7 +68,7 @@ var emailHandler =  {
         var emailHtml = "<div style='font-family:Helvetica'>"+req.body.firstname + ", welcome to Councils!<br>You are now a member of unit #" + req.body.unitnum + ". "
             + "<br><br>Account Details<br><br>"
             + req.body.firstname + " " + req.body.lastname + "<br><br>"
-            + "<a href='mailto:hello@councils.io'  style='color:#32b38a;text-decoration:none'>"+req.body.email+"</a>"
+            + "<a href='mailto:"+req.body.email+"'  style='color:#32b38a;text-decoration:none'>"+req.body.email+"</a>"
             + "<br><br>These are the features you have access to as a member."
             +"<br><br>"
             +"&nbsp; &nbsp; &ndash; Create Agendas.<br>"
@@ -125,7 +125,7 @@ var emailHandler =  {
         var emailHtml = "<div style='font-family:Helvetica'>" + req.body.name + ","
             +"<br><br>Your account has been inactived by <span style='color:#32b38a'>"+req.body.adminname+"</span>."
             +"<br><br>If you have questions please email us at <a href='mailto:hello@councils.io' style='color:#32b38a;text-decoration:none'>hello@councils.io</a>"
-            +"<br><br>For future access to Councils in another calling, remember to log in using john.smith@company.com as your email."
+            +"<br><br>For future access to Councils in another calling, remember to log in using <a href='mailto:"+ req.body.email +"'>"+ req.body.email +"</a> as your email."
             +"<br><br>Copyright (C) 2017 Councils Inc. All rights reserved.</div>";
         var emailText = "<div style='font-family:Helvetica'>" + req.body.name + ","
             +"\n\nYour account has been inactived by "+req.body.adminname+"."
