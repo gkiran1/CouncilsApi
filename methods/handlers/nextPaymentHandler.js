@@ -1,7 +1,7 @@
 var nextPaymentHandler = function (req, res) {
     // Set your secret key: remember to change this to your live secret key in production
     // See your keys here: https://dashboard.stripe.com/account/apikeys
-    var stripe = require("stripe")("sk_test_rOEvg4We5LrciAzhUhFzS7ah");
+    var stripe = require("stripe")("pk_test_6zLTl66mCBKJihsb5xN6i6qZ");
 
     if (!req.body.subscriptionid) res.status(400).send('Subscription id is not provided');
 
