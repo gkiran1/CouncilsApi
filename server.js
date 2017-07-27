@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-var VERSIONS = { 'Pre-Production': '/v0', 'Version 1': '/v1' };
+var VERSIONS = { 'Pre-Production': '/v1' };
 
 app.all('/v1/*', function(req, res, next) {
   // CORS headers
@@ -35,9 +35,9 @@ app.get('/', function (req, res) {
     res.json(VERSIONS);
 })
 app.use(routes);
-app.listen(8080, function () {
+app.listen(3333, function () {
     console.log('server is running');
-})
+});
 //})
 
 //Firebase

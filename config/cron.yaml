@@ -1,0 +1,19 @@
+cron:
+- description: Daily Agendas AutoDelete
+  url: /cron/agendas
+  schedule: every day 12:45
+  timezone: Asia/Calcutta
+  target: pre-prod
+  login: admin
+- description: Daily Assignments AutoDelete
+  url: /cron/assignments
+  schedule: every day 12:45
+  timezone: Asia/Calcutta
+  target: pre-prod
+  login: admin
+- description: Daily Discussions AutoDelete
+  url: /cron/discussions
+  timezone: Asia/Calcutta
+  schedule: every day 12:45
+  target: pre-prod
+  login: admin
