@@ -322,7 +322,7 @@ var emailHandler =  {
     inviteAdmin: function(req, res){
          var subject = "Welcome to Councils"
          var emailHtml = `<div style="font-family:Helvetica">
-            <p>John Smith,</p>
+            <p>${req.body.name},</p>
             <p><span style="color:#32b38a">${req.body.adminname}</span> has invited you to the Councils platform.</p>
             <p>Using Councils, you and <span style="color:#32b38a">${req.body.adminname}</span> will be able to extend council communication and ministry into everyday life.</p>
             <p><b>Click on this link to sign up</b><br /><a href='https:/signup.councils.io' target="_blank" style="color:#32b38a;text-decoration:none;">signup.councils.io</a></p>
