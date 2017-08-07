@@ -325,7 +325,7 @@ var emailHandler =  {
             <p>${req.body.name},</p>
             <p><span style="color:#32b38a">${req.body.adminname}</span> has invited you to the Councils platform.</p>
             <p>Using Councils, you and <span style="color:#32b38a">${req.body.adminname}</span> will be able to extend council communication and ministry into everyday life.</p>
-            <p><b>Click on this link to sign up</b><br /><a href='https:/signup.councils.io' target="_blank" style="color:#32b38a;text-decoration:none;">signup.councils.io</a></p>
+            <p><b>Click on this link to sign up</b><br /><a href='https://signup.councils.io' target="_blank" style="color:#32b38a;text-decoration:none;">signup.councils.io</a></p>
             <p><b>Councils core features</b><br />&nbsp; &nbsp; &ndash; Post agendas<br />&nbsp; &nbsp; &ndash; Start discussions<br />&nbsp; &nbsp; &ndash; Create assignments<br />&nbsp; &nbsp; &ndash; Add files</p>
             <p>If you have questions please email us as <a href='mailto:hello@councils.io' style="color:#32b38a;text-decoration:none">hello@councils.io</a></p>
             <p>Copyright (C) 2017 Councils Inc. All rights reserved.</p></div>`

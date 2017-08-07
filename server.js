@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
     res.json(VERSIONS);
 })
 app.use(routes);
-app.listen(3333, function () {
+app.listen(8080, function () {
     console.log('server is running');
 });
 //})
